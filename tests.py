@@ -45,7 +45,8 @@ class TestStr(unittest.TestCase):
     #if the fraction is negative, is it possible to erroneously have it display 1/-2, vs -1/2?
     
 class TestFloat(unittest.TestCase):
-  pass
+    c = fraction(3,4)
+    self.assertEqual(.75,c.__float__())
   #should return a float of numerator/denomenator
   #negative fraction negative float
 
@@ -56,3 +57,21 @@ class TestAdd(unittest.TestCase):
   #returned faction should be in lowest common form
 
 class TestSub(unittest.TestCase):
+  pass
+  #should raise type error when passed a nonfraction
+  #should return a fraction
+  #returned faction should be in lowest common form
+
+class TestMul(unittest.TestCase):
+  pass
+  #should raise type error when passed a nonfraction
+  #should return a fraction
+  #returned faction should be in lowest common form
+  #negative guest negative result
+
+class TestDiv(unittest.TestCase):
+  pass
+  #should raise type error when passed a nonfraction
+  #should return a fraction
+  #returned faction should be in lowest common form
+  #negative guest negative result
