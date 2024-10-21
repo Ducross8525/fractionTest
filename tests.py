@@ -44,3 +44,9 @@ class TestStr(unittest.TestCase):
     self.assertEqual(" -1/2 ",c.__str__(),"fraction must swap the negation to the numerator when displaying")
     #if the fraction is negative, is it possible to erroneously have it display 1/-2, vs -1/2?
     
+class TestFloat(unittest.TestCase):
+  pass
+  #should return
+  #
+  #
+  #
