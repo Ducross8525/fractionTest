@@ -46,7 +46,13 @@ class TestStr(unittest.TestCase):
     
 class TestFloat(unittest.TestCase):
   pass
-  #should return
-  #
-  #
-  #
+  #should return a float of numerator/denomenator
+  #negative fraction negative float
+
+class TestAdd(unittest.TestCase):
+  pass
+  #should raise type error when passed a nonfraction
+  #should return a fraction
+  #returned faction should be in lowest common form
+
+class TestSub(unittest.TestCase):
