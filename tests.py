@@ -1,6 +1,5 @@
 from fraction import Fraction
 import unittest
-
 class TestInit(unittest.TestCase):
   #several of these will need to check to see if an exception is raised
   def test_divZero(self):
@@ -58,42 +57,129 @@ class TestFloat(unittest.TestCase):
     #negative fraction negative float
 
 class TestAdd(unittest.TestCase):
+  def setUp(self):
+    self.a = Fraction(1,2)
   def test_type(self):
-    c=Fraction()
+    self.setUp()
     with self.assertRaises(TypeError,msg="add method should raise a type error with incorrect argument type"):
-      c.__add__(0)
-      c.__add__("a")
-    #should raise type error when passed a non-fraction
+      self.a.__add__(3.2)
+      self.a.__add__("a")
+    #should raise type error when passed a non-fraction or a non-int
   def test_return(self):
-    c=Fraction()
-    b=Fraction(1,2)
-    a=c.__add__(b)
-    self.assertTrue(isinstance(a,Fraction),"add method should return a Fraction")
+    self.setUp()
+    c=self.a.__add__(self.a)
+    self.assertTrue(isinstance(c,Fraction),"add method should return a Fraction")
     #should return a fraction
   def test_fact(self):
-    c=Fraction(1,2)
-    b=Fraction(1,2)
-    a=c.__add__(b)
-    self.assertEqual(1,a.numerator,"Numerator is not factored")
-    self.assertEqual(1,a.denominator,"Denominator is not factored")
-  #returned faction should be in the lowest common form
+    self.setUp()
+    c=self.a.__add__(self.a)
+    self.assertEqual(1,c.numerator,"Numerator is not factored")
+    self.assertEqual(1,c.denominator,"Denominator is not factored")
+  #returned fraction should be in the lowest common form
+  def test_int(self):
+    self.setUp()
+    c=self.a.__add__(2)
+    self.assertEqual(5,c.numerator,"check that factor adds ints correctly")
+  #returned fraction should add ints akin to whole numbers in commonly understood math
 
 class TestSub(unittest.TestCase):
-  pass
-  #should raise type error when passed a non-fraction
-  #should return a fraction
-  #returned faction should be in the lowest common form
+  def setUp(self):
+    self.a = Fraction(1,2)
+  def test_type(self):
+    self.setUp()
+    with self.assertRaises(TypeError,msg="sub method should raise a type error with incorrect argument type"):
+      self.a.__sub__(3.2)
+      self.a.__sub__("a")
+    #should raise type error when passed a non-fraction or a non-int
+  def test_return(self):
+    self.setUp()
+    c=self.a.__sub__(self.a)
+    self.assertTrue(isinstance(c,Fraction),"sub method should return a Fraction")
+    #should return a fraction
+  def test_fact(self):
+    self.setUp()
+    c=self.a.__sub__(self.a)
+    self.assertEqual(0,c.numerator,"Numerator is not factored")
+    self.assertEqual(1,c.denominator,"Denominator is not factored")
+  #returned fraction should be in the lowest common form
+  def test_int(self):
+    self.setUp()
+    c=self.a.__sub__(2)
+    self.assertEqual(-3,c.numerator,"check that factor subtracts ints correctly")
+  #returned fraction should subtract ints akin to whole numbers in commonly understood math
 
 class TestMul(unittest.TestCase):
-  pass
-  #should raise type error when passed a non-fraction
-  #should return a fraction
-  #returned faction should be in the lowest common form
-  #negative guest negative result
+  def setUp(self):
+    self.a = Fraction(1, 2)
+    self.b = Fraction(2, 3)
+
+  def test_type(self):
+    self.setUp()
+    with self.assertRaises(TypeError, msg="mul method should raise a type error with incorrect argument type"):
+      self.a.__mul__(3.2)
+      self.a.__mul__("a")
+    # should raise type error when passed a non-fraction or a non-int
+
+  def test_return(self):
+    self.setUp()
+    c = self.a.__mul__(self.a)
+    self.assertTrue(isinstance(c, Fraction), "mul method should return a Fraction")
+    # should return a fraction
+
+  def test_fact(self):
+    self.setUp()
+    c = self.a.__mul__(self.b)
+    self.assertEqual(1, c.numerator, "Numerator is not factored")
+    self.assertEqual(3, c.denominator, "Denominator is not factored")
+
+  # returned fraction should be in the lowest common form
+  def test_int(self):
+    self.setUp()
+    c = self.a.__mul__(2)
+    self.assertEqual(1, c.numerator, "check that factor multiplies by ints correctly (numerator")
+    self.assertEqual(1, c.denominator, "check that factor multiplies by ints correctly (denominator)")
+  # returned fraction should subtract ints akin to whole numbers in commonly understood math
+
+  def test_neg(self):
+    self.setUp()
+    c = self.a.__mul__(-1)
+    self.assertEqual(-1, c.numerator, "Numerator is not negated by negative multiplier")
+    #negative guest negative result
 
 class TestDiv(unittest.TestCase):
-  pass
-  #should raise type error when passed a non-fraction
-  #should return a fraction
-  #returned faction should be in the lowest common form
-  #negative guest negative result
+  def setUp(self):
+    self.a = Fraction(1, 2)
+    self.b = Fraction(2, 3)
+
+  def test_type(self):
+    self.setUp()
+    with self.assertRaises(TypeError, msg="truediv method should raise a type error with incorrect argument type"):
+      self.a.__truediv__(3.2)
+      self.a.__truediv__("a")
+    # should raise type error when passed a non-fraction or a non-int
+
+  def test_return(self):
+    self.setUp()
+    c = self.a.__truediv__(self.a)
+    self.assertTrue(isinstance(c, Fraction), "truediv method should return a Fraction")
+    # should return a fraction
+
+  def test_fact(self):
+    self.setUp()
+    c = self.a.__truediv__(self.b)
+    self.assertEqual(3, c.numerator, "Numerator is not factored")
+    self.assertEqual(4, c.denominator, "Denominator is not factored")
+
+  # returned fraction should be in the lowest common form
+  def test_int(self):
+    self.setUp()
+    c = self.a.__truediv__(2)
+    self.assertEqual(1, c.numerator, "check that factor divides by ints correctly (numerator")
+    self.assertEqual(4, c.denominator, "check that factor divides by ints correctly (denominator)")
+  # returned fraction should subtract ints akin to whole numbers in commonly understood math
+
+  def test_neg(self):
+    self.setUp()
+    c = self.a.__truediv__(-1)
+    self.assertEqual(-1, c.numerator, "Numerator is not negated by negative divider")
+    #negative guest negative result
